@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\FilamentServiceProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -185,6 +186,8 @@ return [
         /*
          * Package Service Providers...
          */
+
+        FilamentServiceProvider::class,
 
         /*
          * Application Service Providers...
