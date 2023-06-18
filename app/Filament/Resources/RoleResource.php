@@ -17,6 +17,7 @@ use App\Filament\Resources\RoleResource\RelationManagers;
 use App\Filament\Resources\RoleResource\RelationManagers\PermissionsRelationManager;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\MultiSelect;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 
 class RoleResource extends Resource
@@ -31,8 +32,11 @@ class RoleResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                    TextInput::make('name')->unique(ignoreRecord:true)->required(),
-                    MultiSelect::make('permissions')->relationship('permissions', 'name')->preload()->required(),
+                    TextInput::make('name')->unique(ignoreRecord: true)->required(),
+                    // MultiSelect::make('permissions')->relationship('permissions', 'name')->preload()->required(),
+                    Select::make('permissions')
+                        ->multiple()
+                        ->relationship('permissions', 'name')->preload()->required(),
                 ])
             ]);
     }

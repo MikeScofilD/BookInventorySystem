@@ -2,28 +2,52 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BookResource\Pages;
-use App\Filament\Resources\BookResource\RelationManagers;
-use App\Models\Book;
+use App\Filament\Resources\AuthorResource\RelationManagers\BooksRelationManager;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use App\Models\Book;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\BookResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\BookResource\RelationManagers;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MultiSelect;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
 
 class BookResource extends Resource
 {
     protected static ?string $model = Book::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    protected static ?string $navigationGroup = 'Book Management';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Card::make()->schema([
+                    TextInput::make('title')->required(),
+                    TextInput::make('isbn')->required(),
+                    Select::make('author')
+                        ->multiple()
+                        ->relationship('authors', 'name')->preload()->required(),
+                    Select::make('publisher')
+                        ->multiple()
+                        ->relationship('publishers', 'name')->preload()->required(),
+                    DatePicker::make('publication_year')->required(),
+                    SpatieMediaLibraryFileUpload::make('cover'),
+
+                ])
             ]);
     }
 
@@ -31,7 +55,11 @@ class BookResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id'),
+                TextColumn::make('isbn'),
+                TextColumn::make('title'),
+                TextColumn::make('publication_year'),
+                SpatieMediaLibraryImageColumn::make('cover')
             ])
             ->filters([
                 //
@@ -47,7 +75,7 @@ class BookResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            // BooksRelationManager::class,
         ];
     }
 

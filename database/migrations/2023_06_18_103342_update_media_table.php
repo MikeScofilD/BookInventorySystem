@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->date('publication_year');
-            $table->string('isbn')->unique();
-            $table->timestamps();
+        Schema::table('media', function (Blueprint $table) {
+            //
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::table('media', function (Blueprint $table) {
+            Schema::dropIfExists('media');
+        });
     }
 };

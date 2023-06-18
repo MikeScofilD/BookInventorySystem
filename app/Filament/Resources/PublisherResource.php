@@ -22,6 +22,8 @@ class PublisherResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-library';
 
+    protected static ?string $navigationGroup = 'Book Management';
+
     public static function form(Form $form): Form
     {
         return $form
