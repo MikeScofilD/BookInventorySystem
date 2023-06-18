@@ -1,6 +1,6 @@
 
 
-Here is a step-by-step guide on unpacking a Laravel project from GitHub:
+Here is a step-by-step guide on setting up and running the application Laravel project from GitHub:
 
 1) Clone the repository: Open the command line (terminal) on your computer and execute the following command to clone the repository from GitHub:
 
