@@ -2,12 +2,11 @@
 
 namespace App\Policies;
 
-
+use App\Models\Book;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class RolePolicy
+class BookPolicy
 {
     use HandlesAuthorization;
 
@@ -19,19 +18,19 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasAnyRole('super-admin', 'admin', 'moderator');
+        return $user->hasAnyRole('super-admin', 'admin', 'moderator', 'user');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Role $role)
+    public function view(User $user, Book $book)
     {
-        return $user->hasAnyRole('super-admin', 'admin');
+        return $user->hasAnyRole('super-admin', 'admin', 'moderator', 'user');
     }
 
     /**
@@ -42,41 +41,41 @@ class RolePolicy
      */
     public function create(User $user)
     {
-        return $user->hasAnyRole('super-admin', 'admin');
+        return $user->hasAnyRole('super-admin', 'admin', 'moderator');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Role $role)
+    public function update(User $user, Book $book)
     {
-        return $user->hasAnyRole('super-admin', 'admin');
+        return $user->hasAnyRole('super-admin', 'admin', 'moderator');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Role $role)
+    public function delete(User $user, Book $book)
     {
-        return $user->hasAnyRole('super-admin', 'admin');
+        return $user->hasAnyRole('super-admin', 'admin', 'moderator');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Role $role)
+    public function restore(User $user, Book $book)
     {
         //
     }
@@ -85,10 +84,10 @@ class RolePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Spatie\Permission\Models\Role  $role
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Role $role)
+    public function forceDelete(User $user, Book $book)
     {
         //
     }
