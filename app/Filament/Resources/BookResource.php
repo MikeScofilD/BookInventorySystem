@@ -55,10 +55,10 @@ class BookResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('isbn'),
-                TextColumn::make('title'),
-                TextColumn::make('publication_year'),
+                TextColumn::make('id')->sortable(),
+                TextColumn::make('isbn')->sortable()->searchable(),
+                TextColumn::make('title')->sortable()->searchable()->limit(35),
+                TextColumn::make('publication_year')->sortable()->searchable(),
                 SpatieMediaLibraryImageColumn::make('cover')
             ])
             ->filters([
