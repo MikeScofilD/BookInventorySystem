@@ -16,7 +16,9 @@ Replace <directory_name> with the name of the directory where the repository was
 
 3) Install dependencies: Run the composer install command to install all the dependencies specified in the composer.json file:
 
+    npm install
     composer install
+    
 
 4) Create the .env file: Copy the contents of the .env.example file into a new .env file:
 
@@ -44,6 +46,7 @@ Replace <directory_name> with the name of the directory where the repository was
     If the images are not displaying, modify the .env file: Update the APP_URL to http://127.0.0.1:8000.
 
 8) Start the development server: Launch the Laravel's built-in development server using the command:
+    npm run dev
     php artisan serve
 
 9) Open the application in a browser: Open a web browser and navigate to http://localhost:8000 to see your Laravel application in action.

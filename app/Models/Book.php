@@ -11,7 +11,7 @@ class Book extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
-    
+
     protected $fillable = ['title', 'publication_year', 'isbn'];
 
     public function authors()
@@ -22,5 +22,14 @@ class Book extends Model implements HasMedia
     public function publishers()
     {
         return $this->belongsToMany(Publisher::class);
+    }
+
+    public function getImageUrl()
+    {
+        if ($this->hasMedia('images')) {
+            return $this->getFirstMediaUrl('images');
+        }
+
+        return null;
     }
 }
